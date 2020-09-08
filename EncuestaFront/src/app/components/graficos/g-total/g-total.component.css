@@ -1,0 +1,13 @@
+.container{
+    text-align: center;
+}
+
+h3 {
+    font-size: 30px;
+}
+
+.cantidad {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 70px;
+}
