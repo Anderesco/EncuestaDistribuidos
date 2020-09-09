@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -53,9 +53,17 @@ export class TangibilidadService {
   }
 
   getServicioEjemplo(){
-    this.http.get('https://restcountries.eu/rest/v2/lang/es')
-          .subscribe(paises => {
-            console.log(paises);
+
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+      })
+    };
+    
+    this.http.get('http://localhost:8080/alumno/', httpOptions)
+          .subscribe(data => {
+            console.log(data);
             
           });
   }
