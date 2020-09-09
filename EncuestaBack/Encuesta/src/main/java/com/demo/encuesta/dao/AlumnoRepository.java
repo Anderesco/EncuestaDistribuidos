@@ -17,4 +17,12 @@ public class AlumnoRepository
             return session.createNativeQuery("SELECT * FROM Alumno", Alumno.class).list();
         }
     }
+	
+	@SuppressWarnings("unchecked")
+	public List<Object[]> ObtenerAlumnosPorAnio() 
+    {
+        try (Session session = HibernateUtil.getSessionFactoria().openSession()) {
+            return session.createNativeQuery("select base, count(base) from ALUMNO group by base;").list();
+        }
+    }
 }
