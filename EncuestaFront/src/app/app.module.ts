@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { HttpClientModule } from '@angular/common/http';
+
 //Angular Material
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatButtonModule } from "@angular/material/button";
@@ -72,7 +74,8 @@ import { BarraConformidadComponent } from './components/graficos/barra-conformid
     ChartsModule,
     MatGridListModule,
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

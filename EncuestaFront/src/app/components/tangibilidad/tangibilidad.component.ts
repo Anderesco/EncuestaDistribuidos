@@ -19,6 +19,7 @@ export class TangibilidadComponent implements OnInit {
     //console.log("OnInit");
     this.nro_encuestados_ciclo = this._tangibilidadService.getEncuestadosPorCiclo();
     console.log(this.nro_encuestados_ciclo);
+    this._tangibilidadService.getServicioEjemplo();
     
   }
 

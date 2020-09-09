@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -42,12 +43,20 @@ export class TangibilidadService {
   }
   ];
 
-  constructor() { 
+  constructor(private http: HttpClient) { 
     console.log("Tangibilidad Service listo!!");
     
   }
 
   getEncuestadosPorCiclo(){
     return this.nro_encuestados_ciclo;
+  }
+
+  getServicioEjemplo(){
+    this.http.get('https://restcountries.eu/rest/v2/lang/es')
+          .subscribe(paises => {
+            console.log(paises);
+            
+          });
   }
 }
