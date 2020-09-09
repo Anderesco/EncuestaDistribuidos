@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.demo.encuesta.bean.AlumnoBean;
+import com.demo.encuesta.bean.AlumnosAnioBean;
 import com.demo.encuesta.service.hibernate.AlumnoService;
 
 @Controller
@@ -20,5 +21,11 @@ public class AlumnoController
 	@GetMapping("/alumno")
 	public List<AlumnoBean> ObtenerAlumnos(){
 		return alumnoService.ObtenerAlumnos();
+	}
+	
+	@ResponseBody
+	@GetMapping("/alumno/anio")
+	public List<AlumnosAnioBean> ObtenerAlumnosAnio(){
+		return alumnoService.ObtenerAlumnosPorAnio();
 	}
 }
