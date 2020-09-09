@@ -25,4 +25,25 @@ public class AlumnoRepository
             return session.createNativeQuery("select base, count(base) from ALUMNO group by base;").list();
         }
     }
+	
+	@SuppressWarnings("unchecked")
+	public List<Object[]> ObtenerAlumnosPorCiclo() 
+    {
+        try (Session session = HibernateUtil.getSessionFactoria().openSession()) {
+            return session.createNativeQuery("select ciclo, count(base) from ALUMNO group by ciclo;").list();
+        }
+    }
+	
+	@SuppressWarnings("unchecked")
+	public List<Object[]> ObtenerCicloEspectativa(Integer ID) 
+    {
+        try (Session session = HibernateUtil.getSessionFactoria().openSession()) {
+            return session.createNativeQuery("select a.CICLO from ALUMNO a \r\n" + 
+						            		"inner join ALUMNOFORMULARIO af on af.IDALUMNO = a.ID \r\n" + 
+						            		"inner join PREGUNTAS p on p.ID = af.IDPREGUNTA \r\n" + 
+						            		"where p.ID = :ID;")
+            								.setParameter("ID", ID)
+            								.list();
+        }
+    }
 }
