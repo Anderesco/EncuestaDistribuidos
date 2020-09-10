@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.demo.encuesta.bean.AlumnoBean;
 import com.demo.encuesta.bean.AlumnoCicloBean;
 import com.demo.encuesta.bean.AlumnosAnioBean;
 import com.demo.encuesta.bean.CantidadTotalEncuestaBean;
+import com.demo.encuesta.bean.EspectativaPreguntaBean;
 import com.demo.encuesta.service.hibernate.AlumnoService;
 
 @CrossOrigin(origins="*")
@@ -45,4 +47,9 @@ public class AlumnoController
 		return alumnoService.ObtenerCantidadTotalEncuestados();
 	}
 	
+	@ResponseBody
+	@GetMapping("/alumno/espctativa/{dimensionID}")
+	public List<EspectativaPreguntaBean> ObtenerEspectativasPorPreguntas(@PathVariable Integer dimensionID){
+		return alumnoService.ObtenerEspectativasPorPreguntas(dimensionID);
+	}
 }

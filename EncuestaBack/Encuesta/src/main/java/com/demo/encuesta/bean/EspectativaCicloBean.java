@@ -26,4 +26,12 @@ public class EspectativaCicloBean implements Serializable
 	public void setEspectativaPostiva(Integer espectativaPostiva) {
 		this.espectativaPostiva = espectativaPostiva;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "EspectativaCicloBean [ciclo=" + ciclo + ", espectativaPostiva=" + espectativaPostiva + "]";
+	}
+	
+	
 }

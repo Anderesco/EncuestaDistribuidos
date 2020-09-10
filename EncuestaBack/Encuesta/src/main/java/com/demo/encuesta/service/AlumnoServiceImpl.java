@@ -90,19 +90,16 @@ public class AlumnoServiceImpl implements AlumnoService
 		List<EspectativaPreguntaBean> espectativaPregunta = new ArrayList<EspectativaPreguntaBean>();
 		
 		List<Object[]> preguntasPorDimension = this.preguntaRepository.ObtenerPreguntasPorDimension(ID);
+		List<Object[]> lispreguntasObj = new ArrayList<Object[]>();
 		
 		for(Object[] preguntasObj : preguntasPorDimension) {
-			List<Object[]> listaObjetos = this.alumnoRepositorio.ObtenerCicloEspectativa((Integer) preguntasObj[0]);
-			
-			for(Object[] listaObjetoPreguntas : listaObjetos) {
-				EspectativaCicloBean cicloBean = new EspectativaCicloBean();
-			}
+			EspectativaPreguntaBean preguntaBean = new EspectativaPreguntaBean();
+			preguntaBean.setNombrePregunta((String) preguntasObj[1]);
 		}
 		
+		espectativaPregunta.forEach(System.out :: println);
 		
-		
-		
-		return null;
+		return espectativaPregunta;
 	}
 	
 	

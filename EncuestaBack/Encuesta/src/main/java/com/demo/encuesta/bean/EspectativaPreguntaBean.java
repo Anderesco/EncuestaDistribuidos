@@ -27,4 +27,10 @@ public class EspectativaPreguntaBean implements Serializable
 	}
 	
 	
+	@Override
+	public String toString() {
+		return "EspectativaPreguntaBean [nombrePregunta=" + nombrePregunta + ", ciclos=" + ciclos + "]";
+	}
+	
+	
 }
