@@ -86,18 +86,25 @@ public class AlumnoServiceImpl implements AlumnoService
 
 	@Override
 	public List<EspectativaPreguntaBean> ObtenerEspectativasPorPreguntas(Integer ID) {
-		List<EspectativaCicloBean> espectativaCicloBean = new ArrayList<>();
 		List<EspectativaPreguntaBean> espectativaPregunta = new ArrayList<EspectativaPreguntaBean>();
 		
 		List<Object[]> preguntasPorDimension = this.preguntaRepository.ObtenerPreguntasPorDimension(ID);
-		List<Object[]> lispreguntasObj = new ArrayList<Object[]>();
 		
-		for(Object[] preguntasObj : preguntasPorDimension) {
-			EspectativaPreguntaBean preguntaBean = new EspectativaPreguntaBean();
-			preguntaBean.setNombrePregunta((String) preguntasObj[1]);
+		for(Object[] preguntas : preguntasPorDimension) {
+			EspectativaPreguntaBean preguntasBean = new EspectativaPreguntaBean();
+			preguntasBean.setId((Integer) preguntas[0]);
+			preguntasBean.setNombrePregunta((String) preguntas[1]);
+			preguntasBean.setCiclos(this.alumnoRepositorio.ObtenerCicloEspectativa((Integer) preguntas[0])
+					.stream().map(objeto -> {
+						EspectativaCicloBean cicloBean = new EspectativaCicloBean();
+						cicloBean.setCiclo((String) objeto[0]);
+						cicloBean.setEspectativaPostiva((Integer) objeto[1]);
+						return cicloBean;
+					})
+					.collect(Collectors.toList()));
+			
+			espectativaPregunta.add(preguntasBean);
 		}
-		
-		espectativaPregunta.forEach(System.out :: println);
 		
 		return espectativaPregunta;
 	}

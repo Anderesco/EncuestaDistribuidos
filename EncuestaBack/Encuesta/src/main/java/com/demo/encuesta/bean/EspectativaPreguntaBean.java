@@ -9,10 +9,17 @@ public class EspectativaPreguntaBean implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Integer id;
 	private String nombrePregunta;
 	private List<EspectativaCicloBean> ciclos;
 	
 	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getNombrePregunta() {
 		return nombrePregunta;
 	}
@@ -25,7 +32,6 @@ public class EspectativaPreguntaBean implements Serializable
 	public void setCiclos(List<EspectativaCicloBean> ciclos) {
 		this.ciclos = ciclos;
 	}
-	
 	
 	@Override
 	public String toString() {

@@ -38,11 +38,12 @@ public class AlumnoRepository
 	public List<Object[]> ObtenerCicloEspectativa(Integer ID) 
     {
         try (Session session = HibernateUtil.getSessionFactoria().openSession()) {
-            return session.createNativeQuery("select a.CICLO, 20 from ALUMNO a \r\n" + 
-						            		"inner join ALUMNOFORMULARIO af on af.IDALUMNO = a.ID \r\n" + 
-						            		"inner join PREGUNTAS p on p.ID = af.IDPREGUNTA \r\n" + 
-						            		"where p.ID = :ID \r\n" + 
-						            		"group by a.CICLO")
+            return session.createNativeQuery("select a.CICLO, count(af.RESPUESTA) from ALUMNO a\r\n" + 
+            		"inner join ALUMNOFORMULARIO af on af.IDALUMNO = a.ID\r\n" + 
+            		"inner join PREGUNTAS p on p.ID = af.IDPREGUNTA\r\n" + 
+            		"inner join DIMENSION d on d.ID = p.IDDIMENSION\r\n" + 
+            		"where p.ID = :ID and af.RESPUESTA > 3\r\n" + 
+            		"group by a.CICLO;")
             								.setParameter("ID", ID)
             								.list();
         }
