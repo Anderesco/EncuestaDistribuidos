@@ -1,0 +1,49 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Encuesta Distribuidos</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" opened class="example-sidenav"
+               [fixedInViewport]="true" [fixedTopGap]="60"
+               [fixedBottomGap]="60">
+               <mat-selection-list #shoes>
+                <mat-list-option [routerLink]="['home']" >
+                  Vista General
+                </mat-list-option>
+                <mat-list-option [routerLink]="['tangibilidad']">
+                  Tangibilidad
+                </mat-list-option>
+                <mat-list-option [routerLink]="['fiabilidad']">
+                  Fiabilidad
+                </mat-list-option>
+                <mat-list-option [routerLink]="['empatia']">
+                  Empatía
+                </mat-list-option>
+                <mat-list-option [routerLink]="['caprespuesta']">
+                  Capacidad de Respuesta
+                </mat-list-option>
+                <mat-list-option [routerLink]="['cortesia']">
+                  Cortesía
+                </mat-list-option>
+              </mat-selection-list>
+  </mat-sidenav>
+
+  <!-- [formGroup]="options" -->
+  <mat-sidenav-content>
+    <div class="main-container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<mat-toolbar class="example-footer">Footer</mat-toolbar>
