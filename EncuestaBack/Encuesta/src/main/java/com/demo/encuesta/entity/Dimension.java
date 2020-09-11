@@ -28,4 +28,12 @@ public class Dimension
 	
 	@OneToMany(mappedBy = "dimension", fetch = FetchType.LAZY)
 	private List<Preguntas> listaPreguntas;
+
+	@Override
+	public String toString() {
+		return "Dimension [idDimension=" + idDimension + ", nombre=" + nombre + ", descripcion=" + descripcion
+				+ ", listaPreguntas=" + listaPreguntas + "]";
+	}
+	
+	
 }

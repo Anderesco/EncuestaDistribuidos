@@ -3,20 +3,68 @@ package com.demo.encuesta.dao;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
-import com.demo.encuesta.entity.Dimension;
 import com.demo.encuesta.util.HibernateUtil;
 
+@Repository
 public class DimensionRepository 
 {
 	@SuppressWarnings("unchecked")
-	public List<Dimension> ObtenerAlumnos(String dimension) 
+	public List<Object[]> ObtenerAlumnos(Integer id)
     {
         try (Session session = HibernateUtil.getSessionFactoria().openSession()) {
-            return session.createNativeQuery("SELECT ID FROM Dimension " +
-            								  "where nombre = :nombre;")
-            								.setParameter("nombre", dimension)
+            return session.createNativeQuery("SELECT ID, Nombre FROM Dimension " +
+            							     "where ID = :ID ")
+            								 .setParameter("ID", id)
             								 .list();
+        }
+    }
+	
+	@SuppressWarnings("unchecked")
+	public List<Object[]> ObtenerPorcentajePositividad()
+    {
+        try (Session session = HibernateUtil.getSessionFactoria().openSession()) {
+            return session.createNativeQuery(
+            		"select w.nombre, case\r\n" + 
+            		"when\r\n" + 
+            		"NOMBRE = 'Capacidad de Respuesta'\r\n" + 
+            		"then suma/5\r\n" + 
+            		"when\r\n" + 
+            		"NOMBRE = 'Elementos Tangibles'\r\n" + 
+            		"then suma/6\r\n" + 
+            		"when\r\n" + 
+            		"NOMBRE = 'Empatía'\r\n" + 
+            		"then suma/5\r\n" + 
+            		"when\r\n" + 
+            		"NOMBRE = 'Expectativa de Fiabilidad'\r\n" + 
+            		"then suma/5\r\n" + 
+            		"when\r\n" + 
+            		"NOMBRE = 'Seguridad'\r\n" + 
+            		"then suma/5\r\n" + 
+            		"else '' end porcentaje\r\n" + 
+            		"from (\r\n" + 
+            		"select t.nombre,\r\n" + 
+            		"sum(CAST(t.porcentaje AS DECIMAL(5,1))) suma\r\n" + 
+            		"from(\r\n" + 
+            		"select f.NOMBRE,g.porcentaje from dimension f,\r\n" + 
+            		"(\r\n" + 
+            		"select a.iddimension, b.porcentaje from preguntas a,\r\n" + 
+            		"(\r\n" + 
+            		"select z.IDPREGUNTA, sum(CAST(z.cant_alu AS DECIMAL(5,1)) * CAST(z.respuesta AS DECIMAL(5,1))/100) porcentaje\r\n" + 
+            		"from(\r\n" + 
+            		"select count(distinct(idalumno)) cant_alu, idpregunta, respuesta\r\n" + 
+            		"from ALUMNOFORMULARIO\r\n" + 
+            		"group by respuesta,idpregunta)z\r\n" + 
+            		"group by IDPREGUNTA)b\r\n" + 
+            		"where a.ID = b.IDPREGUNTA\r\n" + 
+            		"and b.IDPREGUNTA > 26\r\n" + 
+            		")g\r\n" + 
+            		"where f.ID = g.IDDIMENSION\r\n" + 
+            		") t\r\n" + 
+            		"group by t.nombre\r\n" + 
+            		")w;")
+            		.list();
         }
     }
 }

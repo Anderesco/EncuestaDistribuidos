@@ -14,11 +14,27 @@ public class PreguntaRepository
 	public List<Object[]> ObtenerPreguntasPorDimension(Integer ID) 
     {
         try (Session session = HibernateUtil.getSessionFactoria().openSession()) {
-            return session.createNativeQuery("select p.ID, p.NOMBREPREGUNTA from PREGUNTAS p\r\n" + 
+            return session.createNativeQuery(
+            		"select p.ID, p.NOMBREPREGUNTA from PREGUNTAS p\r\n" + 
             		"inner join DIMENSION d on d.ID = p.IDDIMENSION\r\n" + 
             		"where p.IDDIMENSION = :ID")
             		.setParameter("ID", ID)
             		.list();
         }
     }
+	
+	@SuppressWarnings("unchecked")
+	public List<Object[]> ObtenerConformidadPorAnio(Integer id){
+		try (Session session = HibernateUtil.getSessionFactoria().openSession()) {
+            return session.createNativeQuery(
+            		"select alumno.BASE, count(alform.RESPUESTA) from ALUMNO alumno\r\n" + 
+            		"inner join ALUMNOFORMULARIO alform on alform.IDPREGUNTA = alumno.ID\r\n" + 
+            		"inner join PREGUNTAS pregunta on pregunta.ID = alform.IDPREGUNTA\r\n" + 
+            		"inner join DIMENSION dimension on dimension.ID = pregunta.IDDIMENSION\r\n" + 
+            		"where alform.RESPUESTA > 3 and dimension.ID = :ID \r\n" + 
+            		"group by alumno.BASE;")
+            		.setParameter("ID", id)
+            		.list();
+        }
+	}
 }

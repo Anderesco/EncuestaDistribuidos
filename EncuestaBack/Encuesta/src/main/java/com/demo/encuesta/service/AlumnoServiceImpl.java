@@ -1,5 +1,6 @@
 package com.demo.encuesta.service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,9 +12,13 @@ import com.demo.encuesta.bean.AlumnoBean;
 import com.demo.encuesta.bean.AlumnoCicloBean;
 import com.demo.encuesta.bean.AlumnosAnioBean;
 import com.demo.encuesta.bean.CantidadTotalEncuestaBean;
+import com.demo.encuesta.bean.ConformidadAnioBean;
+import com.demo.encuesta.bean.DimensionAnioBean;
 import com.demo.encuesta.bean.EspectativaCicloBean;
 import com.demo.encuesta.bean.EspectativaPreguntaBean;
+import com.demo.encuesta.bean.PositividadDimensionBean;
 import com.demo.encuesta.dao.AlumnoRepository;
+import com.demo.encuesta.dao.DimensionRepository;
 import com.demo.encuesta.dao.PreguntaRepository;
 import com.demo.encuesta.service.hibernate.AlumnoService;
 
@@ -26,6 +31,9 @@ public class AlumnoServiceImpl implements AlumnoService
 	
 	@Autowired
 	private PreguntaRepository preguntaRepository;
+	
+	@Autowired
+	private DimensionRepository dimensionRepository;
 
 	@Override
 	public List<AlumnoBean> ObtenerAlumnos() {
@@ -107,6 +115,42 @@ public class AlumnoServiceImpl implements AlumnoService
 		}
 		
 		return espectativaPregunta;
+	}
+
+	@Override
+	public List<DimensionAnioBean> ObtenerConformidadDimensionAnio(Integer ID) {
+		return this.dimensionRepository.ObtenerAlumnos(ID)
+				.stream()
+				.map(objeto -> {
+					DimensionAnioBean dimensionBean = new DimensionAnioBean();
+					dimensionBean.setId((Integer) objeto[0]);
+					dimensionBean.setDimension((String) objeto[1]);
+					dimensionBean.setListaConformidadAnioBean(this.preguntaRepository.ObtenerConformidadPorAnio(dimensionBean.getId()).stream()
+							.map(objeto2 -> {
+								ConformidadAnioBean conformidadBean = new ConformidadAnioBean();
+								conformidadBean.setAnio((Integer) objeto2[0]);
+								conformidadBean.setEspectativaPositiva((Integer) objeto2[1]);
+								
+								return conformidadBean;
+							})
+							.collect(Collectors.toList()));
+					
+					return dimensionBean;
+				})
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<PositividadDimensionBean> ObtenerDimensionPorcentaje() {
+		return this.dimensionRepository.ObtenerPorcentajePositividad().parallelStream()
+				.map(objeto -> {
+					PositividadDimensionBean positividadDimensionBean = new PositividadDimensionBean();
+					positividadDimensionBean.setNombreDimension((String) objeto[0]);
+					positividadDimensionBean.setPorcentaje(Double.parseDouble(String.valueOf((BigDecimal) objeto[1])));
+					
+					return positividadDimensionBean;
+				})
+				.collect(Collectors.toList());
 	}
 	
 	
