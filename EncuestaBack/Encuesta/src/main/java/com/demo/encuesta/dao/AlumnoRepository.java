@@ -3,6 +3,7 @@ package com.demo.encuesta.dao;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import com.demo.encuesta.entity.Alumno;
@@ -47,5 +48,25 @@ public class AlumnoRepository
             								.setParameter("ID", ID)
             								.list();
         }
+    }
+	
+	
+	public Long guardarAlumno(Alumno alumno) 
+	{
+        Transaction transaction = null;
+        Long codigo = (long) 0;
+        try (Session session = HibernateUtil.getSessionFactoria().openSession()) {
+            transaction = session.beginTransaction(); 
+            codigo = (Long) session.save(alumno);
+            transaction.commit();    
+            
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        
+        return codigo;
     }
 }

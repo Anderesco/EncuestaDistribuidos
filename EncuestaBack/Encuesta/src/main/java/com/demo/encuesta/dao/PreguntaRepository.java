@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
+import com.demo.encuesta.entity.Preguntas;
 import com.demo.encuesta.util.HibernateUtil;
 
 @Repository
@@ -37,4 +38,12 @@ public class PreguntaRepository
             		.list();
         }
 	}
+	
+	public List<Preguntas> ObtenerPreguntasTotales() 
+    {
+        try (Session session = HibernateUtil.getSessionFactoria().openSession()) {
+            return session.createNativeQuery(
+            		"select * from PREGUNTAS", Preguntas.class).list();
+        }
+    }
 }

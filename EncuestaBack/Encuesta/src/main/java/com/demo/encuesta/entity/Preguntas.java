@@ -22,7 +22,7 @@ public class Preguntas
 	@Column(name = "NOMBREPREGUNTA")
 	private String nombrePregunta;
 	
-	@Column(name = "DESCRIPION")
+	@Column(name = "DESCRIPCION")
 	private String descricionPregunta;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

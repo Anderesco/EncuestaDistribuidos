@@ -29,4 +29,37 @@ public class AlumnoFormulario
 	
 	@Column(name = "RESPUESTA")
 	private String respuesta;
+	
+
+	public Long getIdAlumnoFormulario() {
+		return idAlumnoFormulario;
+	}
+
+	public void setIdAlumnoFormulario(Long idAlumnoFormulario) {
+		this.idAlumnoFormulario = idAlumnoFormulario;
+	}
+
+	public Alumno getAlumno() {
+		return alumno;
+	}
+
+	public void setAlumno(Alumno alumno) {
+		this.alumno = alumno;
+	}
+
+	public Preguntas getPreguntas() {
+		return preguntas;
+	}
+
+	public void setPreguntas(Preguntas preguntas) {
+		this.preguntas = preguntas;
+	}
+
+	public String getRespuesta() {
+		return respuesta;
+	}
+
+	public void setRespuesta(String respuesta) {
+		this.respuesta = respuesta;
+	}
 }
