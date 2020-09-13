@@ -2,22 +2,22 @@
     <mat-grid-list cols="12" rowHeight="300px">
         <mat-grid-tile [colspan]="12">
             <mat-card>
-                <app-barra-expectativa></app-barra-expectativa>
+                <app-barra-expectativa [expectativaPorPregunta]= "expectativaPorPregunta"></app-barra-expectativa>
             </mat-card>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="4">
             <mat-card>
-                <app-g-pie></app-g-pie>
+                <app-g-pie [nro_encuestados_ciclo]= "nro_encuestados_ciclo"></app-g-pie>
             </mat-card>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="4">
             <mat-card>
-                <app-barra-conformidad></app-barra-conformidad>
+                <app-barra-conformidad [conformidadPorTangibilidad]= "conformidadPorTangibilidad"></app-barra-conformidad>
             </mat-card>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="4">
             <mat-card>
-                <app-g-total></app-g-total>
+                <app-g-total [totalEncuestados]= "totalEncuestados"></app-g-total>
             </mat-card>
         </mat-grid-tile>
     </mat-grid-list>
