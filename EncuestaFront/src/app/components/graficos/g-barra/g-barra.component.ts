@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
 
@@ -7,28 +7,44 @@ import { Label, Color } from 'ng2-charts';
   templateUrl: './g-barra.component.html',
   styleUrls: ['./g-barra.component.css']
 })
-export class GBarraComponent implements OnInit {
+export class GBarraComponent implements OnInit, OnChanges {
+
+  @Input() nro_encuestados_anio:any[] = [];
 
   barChartOptions: ChartOptions = {
     responsive: true,
     maintainAspectRatio: false
   };
-  barChartLabels: Label[] = ['2013', '2014', '2015', '2016', '2017', '2018'];
+  barChartLabels: Label[] = [];
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
 
   barChartData: ChartDataSets[] = [
-    { data: [45, 37, 60, 70, 46, 33], label: 'Número de Alumnos' }
+    { data: [], label: 'Número de Alumnos' }
   ];
 
   barChartColors: Color[] = [
     { backgroundColor: 'rgba(100, 255, 100, 0.6)' },
   ]
 
-  constructor() { }
+  constructor() {     
+    
+  }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(){
+    console.log("G-Barra OnChange");
+    
+    this.barChartLabels = [];
+    this.barChartData[0].data = [];
+    for (let index = 0; index < this.nro_encuestados_anio.length; index++) {
+      this.barChartLabels.push(this.nro_encuestados_anio[index].anio)
+      this.barChartData[0].data.push(this.nro_encuestados_anio[index].cantidad)
+    }
+    
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
 
@@ -7,19 +7,21 @@ import { Label, Color } from 'ng2-charts';
   templateUrl: './barra-conformidad.component.html',
   styleUrls: ['./barra-conformidad.component.css']
 })
-export class BarraConformidadComponent implements OnInit {
+export class BarraConformidadComponent implements OnInit, OnChanges {
+
+  @Input() conformidadPorTangibilidad:any[] = [];
 
   barChartOptions: ChartOptions = {
     responsive: true,
     maintainAspectRatio: false
   };
-  barChartLabels: Label[] = ['2013', '2014', '2015', '2016', '2017', '2018'];
+  barChartLabels: Label[] = [];
   barChartType: ChartType = 'horizontalBar';
   barChartLegend = true;
   barChartPlugins = [];
 
   barChartData: ChartDataSets[] = [
-    { data: [45, 37, 60, 70, 46, 33], label: 'Número de Alumnos' }
+    { data: [], label: 'Número de Alumnos' }
   ];
 
   barChartColors: Color[] = [
@@ -29,6 +31,15 @@ export class BarraConformidadComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(){
+    this.barChartLabels = [];
+    this.barChartData[0].data = [];
+    for (let i = 0; i < this.conformidadPorTangibilidad.length; i++) {
+      this.barChartLabels.push(this.conformidadPorTangibilidad[i].anio);
+      this.barChartData[0].data.push(this.conformidadPorTangibilidad[i].espectativaPositiva);
+    }
   }
 
 }

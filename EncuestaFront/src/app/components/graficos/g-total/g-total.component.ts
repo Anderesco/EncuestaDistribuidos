@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-g-total',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./g-total.component.css']
 })
 export class GTotalComponent implements OnInit {
+
+  @Input() totalEncuestados: number = null;
 
   constructor() { }
 

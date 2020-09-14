@@ -6,54 +6,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class TangibilidadService {
 
-  private nro_encuestados_ciclo:any[] = [
-    {
-      "nomb_pregunta": "Pregunta 1",
-      "ciclos": [
-          {
-              "nomb_ciclo": "Ciclo 6",
-              "nro_alumnos_expectativa_positiva": 20
-          },
-          {
-              "nomb_ciclo": "Ciclo 8",
-              "nro_alumnos_expectativa_positiva": 20
-          },
-          {
-              "nomb_ciclo": "Ciclo 9",
-              "nro_alumnos_expectativa_positiva": 20
-          }
-      ]
-  },
-  {
-      "nomb_pregunta": "Pregunta 2",
-      "ciclos": [
-          {
-              "nomb_ciclo": "Ciclo 6",
-              "nro_alumnos_expectativa_positiva": 20
-          },
-          {
-              "nomb_ciclo": "Ciclo 8",
-              "nro_alumnos_expectativa_positiva": 20
-          },
-          {
-              "nomb_ciclo": "Ciclo 9",
-              "nro_alumnos_expectativa_positiva": 20
-          }
-      ]
-  }
-  ];
-
   constructor(private http: HttpClient) { 
     console.log("Tangibilidad Service listo!!");
     
   }
 
-  getEncuestadosPorCiclo(){
-    return this.nro_encuestados_ciclo;
-  }
-
-  getServicioEjemplo(){
-
+  getEncuentadosPorCiclo(){
     const httpOptions = {
       headers: new HttpHeaders({ 
         'Access-Control-Allow-Origin':'*',
@@ -61,10 +19,39 @@ export class TangibilidadService {
       })
     };
     
-    this.http.get('http://localhost:8080/alumno/', httpOptions)
-          .subscribe(data => {
-            console.log(data);
-            
-          });
+    return this.http.get('http://localhost:8080//alumno/ciclo', httpOptions);
   }
+
+  getTotalEncuestados(){
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+      })
+    };
+    
+    return this.http.get('http://localhost:8080//alumno/total', httpOptions);
+  }
+
+  getExpectativaPorPregunta(){
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+      })
+    };
+    return this.http.get('http://localhost:8080//alumno/espctativa/5', httpOptions);
+  }
+
+  getConformidadDimensionAnio(){
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+      })
+    };
+    return this.http.get('http://localhost:8080/alumno/reporte/5  ', httpOptions);
+  }
+
+
 }

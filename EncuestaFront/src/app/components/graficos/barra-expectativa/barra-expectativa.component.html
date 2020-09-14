@@ -1,7 +1,8 @@
 <div class="container">
     <h3>Nivel de Expectativa Por Pregunta</h3>
     <div style="height:200px;width:1200px;" class="chart-wrapper center">
-        <canvas baseChart 
+        <mat-spinner style="margin:0 auto;" *ngIf="!loading"></mat-spinner>
+        <canvas baseChart *ngIf="loading"
             [datasets]="barChartData"
             [labels]="barChartLabels"
             [options]="barChartOptions"
@@ -10,4 +11,4 @@
             [chartType]="barChartType">
         </canvas>
     </div>
-  </div>  
+</div>  
