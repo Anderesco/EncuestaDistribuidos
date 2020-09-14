@@ -29,10 +29,10 @@ public class PreguntaRepository
 		try (Session session = HibernateUtil.getSessionFactoria().openSession()) {
             return session.createNativeQuery(
             		"select alumno.BASE, count(alform.RESPUESTA) from ALUMNO alumno\r\n" + 
-            		"inner join ALUMNOFORMULARIO alform on alform.IDPREGUNTA = alumno.ID\r\n" + 
+            		"inner join ALUMNOFORMULARIO alform on alform.IDALUMNO = alumno.ID\r\n" + 
             		"inner join PREGUNTAS pregunta on pregunta.ID = alform.IDPREGUNTA\r\n" + 
             		"inner join DIMENSION dimension on dimension.ID = pregunta.IDDIMENSION\r\n" + 
-            		"where alform.RESPUESTA > 3 and dimension.ID = :ID \r\n" + 
+            		"where alform.RESPUESTA > 3 and dimension.ID = :ID and pregunta.ID >= 27\r\n" + 
             		"group by alumno.BASE;")
             		.setParameter("ID", id)
             		.list();
