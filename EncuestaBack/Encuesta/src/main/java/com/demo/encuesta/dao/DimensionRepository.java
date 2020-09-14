@@ -29,19 +29,19 @@ public class DimensionRepository
             		"select w.nombre, case\r\n" + 
             		"when\r\n" + 
             		"NOMBRE = 'Capacidad de Respuesta'\r\n" + 
-            		"then suma/5\r\n" + 
+            		"then round(suma/5,2)\r\n" + 
             		"when\r\n" + 
             		"NOMBRE = 'Elementos Tangibles'\r\n" + 
-            		"then suma/6\r\n" + 
+            		"then round(suma/6,2)\r\n" + 
             		"when\r\n" + 
             		"NOMBRE = 'Empatía'\r\n" + 
-            		"then suma/5\r\n" + 
+            		"then round(suma/5,2)\r\n" + 
             		"when\r\n" + 
             		"NOMBRE = 'Expectativa de Fiabilidad'\r\n" + 
-            		"then suma/5\r\n" + 
+            		"then round(suma/5,2)\r\n" + 
             		"when\r\n" + 
             		"NOMBRE = 'Seguridad'\r\n" + 
-            		"then suma/5\r\n" + 
+            		"then round(suma/5,2)\r\n" + 
             		"else '' end porcentaje\r\n" + 
             		"from (\r\n" + 
             		"select t.nombre,\r\n" + 
@@ -51,17 +51,18 @@ public class DimensionRepository
             		"(\r\n" + 
             		"select a.iddimension, b.porcentaje from preguntas a,\r\n" + 
             		"(\r\n" + 
-            		"select z.IDPREGUNTA, sum(CAST(z.cant_alu AS DECIMAL(5,1)) * CAST(z.respuesta AS DECIMAL(5,1))/100) porcentaje\r\n" + 
+            		"select z.IDPREGUNTA, sum(CAST(z.cant_alu AS DECIMAL(5,1)) * CAST(z.respuesta AS DECIMAL(5,1))/(CAST( z.tot_alu AS DECIMAL(5,1))*5)) porcentaje\r\n" + 
             		"from(\r\n" + 
-            		"select count(distinct(idalumno)) cant_alu, idpregunta, respuesta\r\n" + 
-            		"from ALUMNOFORMULARIO\r\n" + 
-            		"group by respuesta,idpregunta)z\r\n" + 
-            		"group by IDPREGUNTA)b\r\n" + 
+            		"select count(distinct(a.idalumno)) cant_alu, a.idpregunta, a.respuesta, count(distinct(b.ID)) tot_alu\r\n" + 
+            		"from ALUMNOFORMULARIO a, alumno b\r\n" + 
+            		"group by a.respuesta,a.idpregunta)z\r\n" + 
+            		"group by IDPREGUNTA\r\n" + 
+            		")b\r\n" + 
             		"where a.ID = b.IDPREGUNTA\r\n" + 
             		"and b.IDPREGUNTA > 26\r\n" + 
             		")g\r\n" + 
             		"where f.ID = g.IDDIMENSION\r\n" + 
-            		") t\r\n" + 
+            		")t\r\n" + 
             		"group by t.nombre\r\n" + 
             		")w;")
             		.list();

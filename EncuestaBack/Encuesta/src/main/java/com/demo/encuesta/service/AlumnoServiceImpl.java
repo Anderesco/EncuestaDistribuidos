@@ -1,6 +1,7 @@
 package com.demo.encuesta.service;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -144,9 +145,10 @@ public class AlumnoServiceImpl implements AlumnoService
 	public List<PositividadDimensionBean> ObtenerDimensionPorcentaje() {
 		return this.dimensionRepository.ObtenerPorcentajePositividad().parallelStream()
 				.map(objeto -> {
+					DecimalFormat twoDForm = new DecimalFormat("#.##");
 					PositividadDimensionBean positividadDimensionBean = new PositividadDimensionBean();
 					positividadDimensionBean.setNombreDimension((String) objeto[0]);
-					positividadDimensionBean.setPorcentaje(Double.parseDouble(String.valueOf((BigDecimal) objeto[1])));
+					positividadDimensionBean.setPorcentaje(Double.parseDouble(twoDForm.format(Double.parseDouble(String.valueOf((BigDecimal) objeto[1])))));
 					
 					return positividadDimensionBean;
 				})
