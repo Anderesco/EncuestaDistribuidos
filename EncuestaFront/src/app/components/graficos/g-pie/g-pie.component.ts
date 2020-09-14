@@ -34,8 +34,6 @@ export class GPieComponent implements OnInit, OnChanges {
   ngOnInit() {
   }
 
-<<<<<<< HEAD
-=======
   ngOnChanges(){
     //console.log("G-Barra OnChange");
     
@@ -53,5 +51,4 @@ export class GPieComponent implements OnInit, OnChanges {
     
   }
 
->>>>>>> branch_frontend
 }
