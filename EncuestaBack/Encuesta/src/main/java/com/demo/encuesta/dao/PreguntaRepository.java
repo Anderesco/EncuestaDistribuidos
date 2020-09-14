@@ -18,7 +18,7 @@ public class PreguntaRepository
             return session.createNativeQuery(
             		"select p.ID, p.NOMBREPREGUNTA from PREGUNTAS p\r\n" + 
             		"inner join DIMENSION d on d.ID = p.IDDIMENSION\r\n" + 
-            		"where p.IDDIMENSION = :ID")
+            		"where p.IDDIMENSION = :ID and p.ID < 27")
             		.setParameter("ID", ID)
             		.list();
         }
