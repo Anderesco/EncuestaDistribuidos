@@ -40,6 +40,7 @@ import { GTotalComponent } from './components/graficos/g-total/g-total.component
 import { GExpectativasBarComponent } from './components/graficos/g-expectativas-bar/g-expectativas-bar.component';
 import { BarraExpectativaComponent } from './components/graficos/barra-expectativa/barra-expectativa.component';
 import { BarraConformidadComponent } from './components/graficos/barra-conformidad/barra-conformidad.component';
+import { BarraIndicadoresComponent } from './components/barra-indicadores/barra-indicadores.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { BarraConformidadComponent } from './components/graficos/barra-conformid
     GTotalComponent,
     GExpectativasBarComponent,
     BarraExpectativaComponent,
-    BarraConformidadComponent
+    BarraConformidadComponent,
+    BarraIndicadoresComponent
   ],
   imports: [
     BrowserModule,

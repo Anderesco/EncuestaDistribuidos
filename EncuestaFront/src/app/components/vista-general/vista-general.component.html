@@ -2,7 +2,8 @@
     <mat-grid-list cols="12" rowHeight="300px">
         <mat-grid-tile [colspan]="12">
             <mat-card>
-                <app-g-barra [nro_encuestados_anio]= "nro_encuestados_anio"></app-g-barra>
+                <!-- <app-g-barra [nro_encuestados_anio]= "nro_encuestados_anio"></app-g-barra> -->
+                <app-barra-indicadores [porcentajeDimiensiones]= "porcentajeDimiensiones"></app-barra-indicadores>
             </mat-card>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="4">
@@ -12,7 +13,8 @@
         </mat-grid-tile>
         <mat-grid-tile [colspan]="4">
             <mat-card>
-                <app-g-tabla [porcentajeDimiensiones]= "porcentajeDimiensiones"></app-g-tabla>
+                <!-- <app-g-tabla [porcentajeDimiensiones]= "porcentajeDimiensiones"></app-g-tabla> -->
+                <app-g-barra [nro_encuestados_anio]= "nro_encuestados_anio"></app-g-barra>
             </mat-card>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="4">
