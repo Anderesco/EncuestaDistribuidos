@@ -50,6 +50,8 @@ export class BarraIndicadoresComponent implements OnInit, OnChanges {
         
       }
 
+      this.barChartData[0].data.push(0);
+
       //console.log(dataExpectativa);
     }
     
