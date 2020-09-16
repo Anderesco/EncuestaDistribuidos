@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.demo.encuesta.bean.AlumnoBean;
 import com.demo.encuesta.bean.AlumnoCicloBean;
 import com.demo.encuesta.bean.AlumnosAnioBean;
+import com.demo.encuesta.bean.BrechaBean;
 import com.demo.encuesta.bean.CantidadTotalEncuestaBean;
 import com.demo.encuesta.bean.DimensionAnioBean;
 import com.demo.encuesta.bean.EspectativaPreguntaBean;
 import com.demo.encuesta.bean.PositividadDimensionBean;
 import com.demo.encuesta.service.hibernate.AlumnoService;
+import com.demo.encuesta.service.hibernate.DimensionService;
 
 @CrossOrigin(origins="*")
 @Controller
@@ -24,6 +26,9 @@ public class AlumnoController
 {
 	@Autowired
 	AlumnoService alumnoService;
+	
+	@Autowired
+	DimensionService dimensionService;
 	
 	@ResponseBody
 	@GetMapping("/alumno")
@@ -65,5 +70,11 @@ public class AlumnoController
 	@GetMapping("/alumno/positividad")
 	public List<PositividadDimensionBean> ObtenerPositividadimension(){
 		return alumnoService.ObtenerDimensionPorcentaje();
+	}
+	
+	@ResponseBody
+	@GetMapping("/alumno/analisisBrecha/{idDimension}")
+	public List<BrechaBean> ObtenerAnalisisBrecha(@PathVariable Integer idDimension){
+		return dimensionService.ObtenerListaBrecha(idDimension);
 	}
 }

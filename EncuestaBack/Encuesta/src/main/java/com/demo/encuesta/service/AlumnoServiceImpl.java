@@ -148,7 +148,8 @@ public class AlumnoServiceImpl implements AlumnoService
 					DecimalFormat twoDForm = new DecimalFormat("#.##");
 					PositividadDimensionBean positividadDimensionBean = new PositividadDimensionBean();
 					positividadDimensionBean.setNombreDimension((String) objeto[0]);
-					positividadDimensionBean.setPorcentaje(Double.parseDouble(twoDForm.format(Double.parseDouble(String.valueOf((BigDecimal) objeto[1])))));
+					//positividadDimensionBean.setPorcentaje(Double.parseDouble(twoDForm.format(Double.parseDouble(String.valueOf((BigDecimal) objeto[1])))));
+					positividadDimensionBean.setPorcentaje(Double.parseDouble(String.valueOf((BigDecimal) objeto[1])));
 					
 					return positividadDimensionBean;
 				})

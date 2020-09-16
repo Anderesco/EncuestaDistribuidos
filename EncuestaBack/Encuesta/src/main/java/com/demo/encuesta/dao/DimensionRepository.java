@@ -68,4 +68,38 @@ public class DimensionRepository
             		.list();
         }
     }
+	
+	@SuppressWarnings("unchecked")
+	public List<Object[]> ObtenerAnalisisBrechaPercepcion(Integer id)
+    {
+        try (Session session = HibernateUtil.getSessionFactoria().openSession()) {
+            return session.createNativeQuery(
+            		"select  SUM(CAST(a.respuesta AS DECIMAL(5,1)))/COUNT(l.ID) from ALUMNOFORMULARIO a\r\n" + 
+            		"join PREGUNTAS p on a.IDPREGUNTA = p.ID\r\n" + 
+            		"join ALUMNO l on l.ID = a.IDALUMNO\r\n" + 
+            		"join DIMENSION d on d.ID = p.IDDIMENSION\r\n" + 
+            		"where p.id>26 and d.ID = :ID\r\n" + 
+            		"GROUP BY NOMBREPREGUNTA, p.ID, d.NOMBRE\r\n" + 
+            		"order by p.ID")
+            								 .setParameter("ID", id)
+            								 .list();
+        }
+    }
+	
+	@SuppressWarnings("unchecked")
+	public List<Object[]> ObtenerAnalisisBrechaEspectativa(Integer id)
+    {
+        try (Session session = HibernateUtil.getSessionFactoria().openSession()) {
+            return session.createNativeQuery(
+            		"select DISTINCT d.NOMBRE, p.ID, p.NOMBREPREGUNTA, SUM(CAST(a.respuesta AS DECIMAL(5,1)))/COUNT(l.ID) from ALUMNOFORMULARIO a\r\n" + 
+            		"join PREGUNTAS p on a.IDPREGUNTA = p.ID\r\n" + 
+            		"join ALUMNO l on l.ID = a.IDALUMNO\r\n" + 
+            		"join DIMENSION d on d.ID = p.IDDIMENSION\r\n" + 
+            		"where p.id<27 and d.ID = :ID \r\n" + 
+            		"GROUP BY NOMBREPREGUNTA, p.ID, d.NOMBRE\r\n" + 
+            		"order by p.ID;")
+            								 .setParameter("ID", id)
+            								 .list();
+        }
+    }
 }
