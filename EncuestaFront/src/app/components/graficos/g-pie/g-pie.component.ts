@@ -43,11 +43,11 @@ export class GPieComponent implements OnInit, OnChanges {
     // console.log(data);
     
     for (let index = 0; index < this.nro_encuestados_ciclo.length; index++) {
-      this.doughnutChartLabels.push(this.nro_encuestados_ciclo[index].ciclo)
+      this.doughnutChartLabels.push("Ciclo " + this.nro_encuestados_ciclo[index].ciclo)
       this.doughnutChartData.push(this.nro_encuestados_ciclo[index].total)
     }
     //this.doughnutChartData[0] = data;
-    console.log(this.doughnutChartData);
+    //console.log(this.doughnutChartData);
     
   }
 
