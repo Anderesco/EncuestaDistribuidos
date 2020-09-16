@@ -46,36 +46,63 @@ export class BarraExpectativaComponent implements OnInit, OnChanges {
 
   ngOnChanges(){
     console.log("G-Barra OnChange");
-    
-    this.barChartLabels = [];
-    let tempData: ChartDataSets[] = [];
-    // this.barChartData[0].data = [];
-    for (let i = 0; i < this.expectativaPorPregunta.length; i++) {
-      this.barChartLabels.push("Preg. " + this.expectativaPorPregunta[i].id)
-      for (let j = 0; j < this.expectativaPorPregunta[j].ciclos.length; j++) {
-        if (tempData.length < this.expectativaPorPregunta[j].ciclos.length) {
-          let label = this.expectativaPorPregunta[j].ciclos[j].ciclo;
-          let data = [];
-          for (let k = 0; k < this.expectativaPorPregunta.length; k++) {
-            //console.log( (k+1) + " " + this.expectativaPorPregunta[k].ciclos[j].espectativaPostiva);
-            data.push(this.expectativaPorPregunta[k].ciclos[j].espectativaPostiva)
+
+    if (this.expectativaPorPregunta.length > 0) {
+      //console.log(this.expectativaPorPregunta);
+      
+      this.barChartLabels = [];
+      let tempData: ChartDataSets[] = [];
+      // this.barChartData[0].data = [];
+      for (let i = 0; i < this.expectativaPorPregunta.length; i++) {
+        this.barChartLabels.push("Preg. " + this.expectativaPorPregunta[i].id)
+        for (let j = 0; j < this.expectativaPorPregunta[i].ciclos.length; j++) {
+          if (tempData.length < this.expectativaPorPregunta[i].ciclos.length) {
+            let label = this.expectativaPorPregunta[i].ciclos[j].ciclo;
+            let data = [];
+            for (let k = 0; k < this.expectativaPorPregunta.length; k++) {
+              //console.log( (k+1) + " " + this.expectativaPorPregunta[k].ciclos[j].espectativaPostiva);
+              //console.log("fdsfs " + this.expectativaPorPregunta[k].ciclos[j].espectativaPostiva);
+              //console.log("k: " + k , " j: " + j + " length" + this.expectativaPorPregunta[k].ciclos.length);
+              if (this.expectativaPorPregunta[k].ciclos.length > j) {
+                if (this.expectativaPorPregunta[k].ciclos[j].ciclo != label) {
+                  if (j>0) {
+                    if (this.expectativaPorPregunta[k].ciclos[j-1].ciclo == label) {
+                      data.push(this.expectativaPorPregunta[k].ciclos[j-1].espectativaPostiva)
+                    }else{
+                      data.push(0);
+                    }
+                  }
+                }else{
+                  data.push(this.expectativaPorPregunta[k].ciclos[j].espectativaPostiva)
+                }
+              }else{
+                data.push(0);
+              }
+              
+              
+              
+            }
+            //console.log(data);
+            
+            tempData.push({data: data, label: "Ciclo " + label});
+            // this.barChartData[j].label = this.expectativaPorPregunta[j].ciclos[j];
+            //console.log(this.barChartData[j].label);
+            
           }
-          tempData.push({data: data, label: label});
-          // this.barChartData[j].label = this.expectativaPorPregunta[j].ciclos[j];
-          //console.log(this.barChartData[j].label);
           
         }
-        
+      }
+
+      //console.log(tempData);
+      //this.barChartLabels = [];
+      this.barChartData =tempData;
+      //console.log(this.barChartData);
+      if (this.expectativaPorPregunta != []) {
+        this.loading = true;
       }
     }
-
-    //console.log(tempData);
-    //this.barChartLabels = [];
-    this.barChartData =tempData;
-    //console.log(this.barChartData);
-    if (this.expectativaPorPregunta != []) {
-      this.loading = true;
-    }
+    
+    
     
     
   }
