@@ -8,16 +8,16 @@ public class ValoresBrechaBean implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Long idPregunta;
+	private Integer idPregunta;
 	private String pregunta;
 	private Double espectativa;
 	private Double percepcion;
 	
 	
-	public Long getIdPregunta() {
+	public Integer getIdPregunta() {
 		return idPregunta;
 	}
-	public void setIdPregunta(Long idPregunta) {
+	public void setIdPregunta(Integer idPregunta) {
 		this.idPregunta = idPregunta;
 	}
 	public String getPregunta() {

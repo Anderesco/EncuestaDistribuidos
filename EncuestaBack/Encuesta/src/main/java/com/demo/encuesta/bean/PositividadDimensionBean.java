@@ -10,7 +10,8 @@ public class PositividadDimensionBean implements Serializable
 	private static final long serialVersionUID = 1L;
 	
 	private String nombreDimension;
-	private Double porcentaje;
+	private Double espectativa;
+	private Double percepcion;
 	
 	public String getNombreDimension() {
 		return nombreDimension;
@@ -18,10 +19,17 @@ public class PositividadDimensionBean implements Serializable
 	public void setNombreDimension(String nombreDimension) {
 		this.nombreDimension = nombreDimension;
 	}
-	public Double getPorcentaje() {
-		return porcentaje;
+	public Double getEspectativa() {
+		return espectativa;
 	}
-	public void setPorcentaje(Double porcentaje) {
-		this.porcentaje = porcentaje;
+	public void setEspectativa(Double espectativa) {
+		this.espectativa = espectativa;
 	}
+	public Double getPercepcion() {
+		return percepcion;
+	}
+	public void setPercepcion(Double percepcion) {
+		this.percepcion = percepcion;
+	}
+	
 }

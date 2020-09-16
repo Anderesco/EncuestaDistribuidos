@@ -145,11 +145,10 @@ public class AlumnoServiceImpl implements AlumnoService
 	public List<PositividadDimensionBean> ObtenerDimensionPorcentaje() {
 		return this.dimensionRepository.ObtenerPorcentajePositividad().parallelStream()
 				.map(objeto -> {
-					DecimalFormat twoDForm = new DecimalFormat("#.##");
 					PositividadDimensionBean positividadDimensionBean = new PositividadDimensionBean();
 					positividadDimensionBean.setNombreDimension((String) objeto[0]);
-					//positividadDimensionBean.setPorcentaje(Double.parseDouble(twoDForm.format(Double.parseDouble(String.valueOf((BigDecimal) objeto[1])))));
-					positividadDimensionBean.setPorcentaje(Double.parseDouble(String.valueOf((BigDecimal) objeto[1])));
+					positividadDimensionBean.setPercepcion(Double.parseDouble((String) objeto[1]));
+					positividadDimensionBean.setEspectativa(Double.parseDouble((String) objeto[2]));	
 					
 					return positividadDimensionBean;
 				})

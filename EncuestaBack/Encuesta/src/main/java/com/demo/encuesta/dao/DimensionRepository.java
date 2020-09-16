@@ -26,6 +26,12 @@ public class DimensionRepository
     {
         try (Session session = HibernateUtil.getSessionFactoria().openSession()) {
             return session.createNativeQuery(
+            		"select o.nombre, SUBSTRING(o.porc,1,8) porcentaje_percep, SUBSTRING(o.porc,9,100) porcentaje_expectativa\r\n" + 
+            		"from\r\n" + 
+            		"(\r\n" + 
+            		"select i.nombre, string_agg(i.porcentaje, '') porc\r\n" + 
+            		"from\r\n" + 
+            		"(\r\n" + 
             		"select w.nombre, case\r\n" + 
             		"when\r\n" + 
             		"NOMBRE = 'Capacidad de Respuesta'\r\n" + 
@@ -42,12 +48,58 @@ public class DimensionRepository
             		"when\r\n" + 
             		"NOMBRE = 'Seguridad'\r\n" + 
             		"then round(suma/5,2)\r\n" + 
-            		"else '' end porcentaje\r\n" + 
+            		"else '' end porcentaje,\r\n" + 
+            		"'PERCEPCION' categoria\r\n" + 
             		"from (\r\n" + 
             		"select t.nombre,\r\n" + 
             		"sum(CAST(t.porcentaje AS DECIMAL(5,1))) suma\r\n" + 
             		"from(\r\n" + 
-            		"select f.NOMBRE,g.porcentaje from dimension f,\r\n" + 
+            		"select f.NOMBRE,g.porcentaje from dimension f, \r\n" + 
+            		"(\r\n" + 
+            		"select a.iddimension, b.porcentaje from preguntas a,\r\n" + 
+            		"(\r\n" + 
+            		"--INI PREGUNTAS X %%%\r\n" + 
+            		"select z.IDPREGUNTA, sum(CAST(z.cant_alu AS DECIMAL(5,1)) * CAST(z.respuesta AS DECIMAL(5,1))/(CAST( z.tot_alu AS DECIMAL(5,1))*5)) porcentaje\r\n" + 
+            		"from(\r\n" + 
+            		"select count(distinct(a.idalumno)) cant_alu, a.idpregunta, a.respuesta, count(distinct(b.ID)) tot_alu\r\n" + 
+            		"from ALUMNOFORMULARIO a, alumno b\r\n" + 
+            		"group by a.respuesta,a.idpregunta)z\r\n" + 
+            		"group by IDPREGUNTA\r\n" + 
+            		"--FIN PREGUNTAS X %%%\r\n" + 
+            		")b\r\n" + 
+            		"where a.ID = b.IDPREGUNTA\r\n" + 
+            		"and b.IDPREGUNTA >= 27\r\n" + 
+            		")g\r\n" + 
+            		"where f.ID = g.IDDIMENSION\r\n" + 
+            		")t\r\n" + 
+            		"group by t.nombre\r\n" + 
+            		")w\r\n" + 
+            		"\r\n" + 
+            		"union\r\n" + 
+            		"\r\n" + 
+            		"select w.nombre, case\r\n" + 
+            		"when\r\n" + 
+            		"NOMBRE = 'Capacidad de Respuesta'\r\n" + 
+            		"then round(suma/5,2)\r\n" + 
+            		"when\r\n" + 
+            		"NOMBRE = 'Elementos Tangibles'\r\n" + 
+            		"then round(suma/6,2)\r\n" + 
+            		"when\r\n" + 
+            		"NOMBRE = 'Empatía'\r\n" + 
+            		"then round(suma/5,2)\r\n" + 
+            		"when\r\n" + 
+            		"NOMBRE = 'Expectativa de Fiabilidad'\r\n" + 
+            		"then round(suma/5,2)\r\n" + 
+            		"when\r\n" + 
+            		"NOMBRE = 'Seguridad'\r\n" + 
+            		"then round(suma/5,2)\r\n" + 
+            		"else '' end porcentaje,\r\n" + 
+            		"'EXPECTATIVA' categoria\r\n" + 
+            		"from (\r\n" + 
+            		"select t.nombre,\r\n" + 
+            		"sum(CAST(t.porcentaje AS DECIMAL(5,1))) suma\r\n" + 
+            		"from(\r\n" + 
+            		"select f.NOMBRE,g.porcentaje from dimension f, \r\n" + 
             		"(\r\n" + 
             		"select a.iddimension, b.porcentaje from preguntas a,\r\n" + 
             		"(\r\n" + 
@@ -59,12 +111,16 @@ public class DimensionRepository
             		"group by IDPREGUNTA\r\n" + 
             		")b\r\n" + 
             		"where a.ID = b.IDPREGUNTA\r\n" + 
-            		"and b.IDPREGUNTA > 26\r\n" + 
+            		"and b.IDPREGUNTA <= 26\r\n" + 
             		")g\r\n" + 
             		"where f.ID = g.IDDIMENSION\r\n" + 
             		")t\r\n" + 
             		"group by t.nombre\r\n" + 
-            		")w;")
+            		")w\r\n" + 
+            		"\r\n" + 
+            		")i\r\n" + 
+            		"group by i.nombre\r\n" + 
+            		")o")
             		.list();
         }
     }
