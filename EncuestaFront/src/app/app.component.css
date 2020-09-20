@@ -35,3 +35,7 @@
   ::ng-deep.mat-pseudo-checkbox{
     display: none !important;
   }
+
+  /deep/ .parametersPanel .mat-expansion-panel-body {
+    padding: 0;
+}

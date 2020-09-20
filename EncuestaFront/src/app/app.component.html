@@ -1,40 +1,65 @@
-<mat-toolbar color="primary">
+<router-outlet *ngIf="!isLoggedIn"></router-outlet>
+
+<mat-toolbar color="primary" *ngIf="isLoggedIn">
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
   <span>Encuesta Distribuidos</span>
   <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+  <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
     <mat-icon>favorite</mat-icon>
   </button>
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
     <mat-icon>share</mat-icon>
-  </button>
+  </button> -->
+  <button mat-button>Christian Dionisio Triveño</button>
+  <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>power_settings_new</mat-icon></button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item><mat-icon>power_settings_new</mat-icon>Cerrar Sesión</button>
+  </mat-menu>
 </mat-toolbar>
 
-<mat-sidenav-container class="example-container">
+<mat-sidenav-container class="example-container" *ngIf="isLoggedIn">
   <mat-sidenav #sidenav mode="side" opened class="example-sidenav"
                [fixedInViewport]="true" [fixedTopGap]="60"
                [fixedBottomGap]="60">
                <mat-selection-list #shoes>
                 <mat-list-option [routerLink]="['home']" >
-                  Vista General
+                  &nbsp;&nbsp;Vista General
                 </mat-list-option>
-                <mat-list-option [routerLink]="['tangibilidad']">
-                  Tangibilidad
-                </mat-list-option>
-                <mat-list-option [routerLink]="['fiabilidad']">
-                  Fiabilidad
-                </mat-list-option>
-                <mat-list-option [routerLink]="['empatia']">
-                  Empatía
-                </mat-list-option>
-                <mat-list-option [routerLink]="['caprespuesta']">
-                  Capacidad de Respuesta
-                </mat-list-option>
-                <mat-list-option [routerLink]="['cortesia']">
-                  Cortesía
-                </mat-list-option>
+                <!-- <mat-list-option [routerLink]="['tablas']" >
+                  &nbsp;&nbsp;Tablas
+                </mat-list-option> -->
+                <mat-accordion>
+                  <mat-expansion-panel (opened)="panelOpenState = true"
+                                       (closed)="panelOpenState = false" 
+                                       class="parametersPanel mat-elevation-z0" 
+                                       [expanded]="true">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Dimensiones
+                      </mat-panel-title>
+                      <!-- <mat-panel-description>
+                      </mat-panel-description> -->
+                    </mat-expansion-panel-header>
+                    <mat-list-option style="margin-left: 0;" [routerLink]="['tangibilidad']">
+                      &nbsp;&nbsp;&nbsp;&nbsp;Tangibilidad
+                    </mat-list-option>
+                    <mat-list-option [routerLink]="['fiabilidad']">
+                      &nbsp;&nbsp;&nbsp;&nbsp;Fiabilidad
+                    </mat-list-option>
+                    <mat-list-option [routerLink]="['empatia']">
+                      &nbsp;&nbsp;&nbsp;&nbsp;Empatía
+                    </mat-list-option>
+                    <mat-list-option [routerLink]="['caprespuesta']">
+                      &nbsp;&nbsp;&nbsp;&nbsp;Capacidad de &nbsp;&nbsp;&nbsp;&nbsp;Respuesta
+                    </mat-list-option>
+                    <mat-list-option [routerLink]="['cortesia']">
+                      &nbsp;&nbsp;&nbsp;&nbsp;Cortesía
+                    </mat-list-option>
+                  </mat-expansion-panel>
+                </mat-accordion>
+                
               </mat-selection-list>
   </mat-sidenav>
 
@@ -46,4 +71,4 @@
   </mat-sidenav-content>
 </mat-sidenav-container>
 
-<mat-toolbar class="example-footer">Footer</mat-toolbar>
+<!-- <mat-toolbar class="example-footer">Footer</mat-toolbar> -->

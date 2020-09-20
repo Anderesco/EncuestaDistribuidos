@@ -1,0 +1,38 @@
+mat-card {
+  max-width: 420px;
+  margin: 2em auto;
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.signin-content {
+  padding: 60px 1rem;
+}
+
+.full-width-input {
+  width: 100%;
+}
+
+.image{
+  height:40em; background-size:cover; width:auto;
+  background-image:url('../../../assets/img/fisi.jpg');
+  background-position:50% 50%;
+}
+
+.fade-in-login {
+  animation: fadeIn ease 1s;
+  -webkit-animation: fadeIn ease 1s;
+  -moz-animation: fadeIn ease 1s;
+  -o-animation: fadeIn ease 1s;
+  -ms-animation: fadeIn ease 1s;
+}
+
+
+@keyframes fadeIn{
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}

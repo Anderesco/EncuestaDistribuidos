@@ -10,6 +10,7 @@ import { Label } from 'ng2-charts';
 export class BarraIndicadoresComponent implements OnInit, OnChanges {
 
   @Input() porcentajeDimiensiones:any[] = [];
+  loading:Boolean = false;
 
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -52,7 +53,9 @@ export class BarraIndicadoresComponent implements OnInit, OnChanges {
 
       this.barChartData[0].data.push(0);
 
-      //console.log(dataExpectativa);
+      if (this.porcentajeDimiensiones != []) {
+        this.loading = true;
+      }
     }
     
     

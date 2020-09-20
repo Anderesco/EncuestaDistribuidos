@@ -1,8 +1,8 @@
 <div class="container">
-    <h3>Satisfacción de Dimensiones en (%)</h3>
-    <div style="height:220px;width:1200px;" class="chart-wrapper center">
-      <mat-spinner style="margin:0 auto;" *ngIf="!loading"></mat-spinner>
-        <canvas baseChart *ngIf="loading"
+    <h3>Nivel de Percepción Por Preguntas</h3>
+    <div style="height:200px;width:95%;" class="chart-wrapper center">
+      <!-- <mat-spinner style="margin:0 auto;" *ngIf="!loading"></mat-spinner> -->
+        <canvas baseChart
           [datasets]="barChartData"
           [labels]="barChartLabels"
           [options]="barChartOptions"

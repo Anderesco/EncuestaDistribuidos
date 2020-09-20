@@ -20,8 +20,14 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatMenuModule} from '@angular/material/menu';
 
 import { ChartsModule } from 'ng2-charts';
+
+
+import { AuthGuard } from './shared/guard/auth.guard';
+import { AuthService } from './services/auth.service';
 
 //Componentes
 import { VistaGeneralComponent } from './components/vista-general/vista-general.component';
@@ -41,6 +47,11 @@ import { GExpectativasBarComponent } from './components/graficos/g-expectativas-
 import { BarraExpectativaComponent } from './components/graficos/barra-expectativa/barra-expectativa.component';
 import { BarraConformidadComponent } from './components/graficos/barra-conformidad/barra-conformidad.component';
 import { BarraIndicadoresComponent } from './components/barra-indicadores/barra-indicadores.component';
+import { BExpectativaComponent } from './components/graficos/b-expectativa/b-expectativa.component';
+import { BPercepcionComponent } from './components/graficos/b-percepcion/b-percepcion.component';
+import { VistaTablasComponent } from './components/vista-tablas/vista-tablas.component';
+import { LoginComponent } from './components/login/login.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +69,12 @@ import { BarraIndicadoresComponent } from './components/barra-indicadores/barra-
     GExpectativasBarComponent,
     BarraExpectativaComponent,
     BarraConformidadComponent,
-    BarraIndicadoresComponent
+    BarraIndicadoresComponent,
+    BExpectativaComponent,
+    BPercepcionComponent,
+    VistaTablasComponent,
+    LoginComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -79,9 +95,11 @@ import { BarraIndicadoresComponent } from './components/barra-indicadores/barra-
     MatCardModule,
     MatTableModule,
     HttpClientModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatExpansionModule,
+    MatMenuModule
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
