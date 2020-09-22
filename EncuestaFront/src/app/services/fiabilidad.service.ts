@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class FiabilidadService {
 
   constructor(private http: HttpClient) { 
-    console.log("Fiabilidad Service listo!!");
+    //console.log("Fiabilidad Service listo!!");
   }
 
   getEncuentadosPorCiclo(){

@@ -29,9 +29,9 @@ private static SessionFactory sessionFactory;
 				Properties ajustes = new Properties();
 				
 				ajustes.put(Environment.SHOW_SQL, "true");
-				ajustes.put(Environment.URL, "jdbc:jtds:sqlserver://localhost;databaseName=encuesta");
-				ajustes.put(Environment.USER, "sa");
-				ajustes.put(Environment.PASS, "sqlserver");
+				ajustes.put(Environment.URL, "jdbc:jtds:sqlserver://dadserver.database.windows.net;database=DADDB");
+				ajustes.put(Environment.USER, "felipe");
+				ajustes.put(Environment.PASS, "Jose1234");
 				ajustes.put(Environment.DIALECT, "org.hibernate.dialect.SQLServerDialect");
 				
 				/*ajustes.put(Environment.SHOW_SQL, "true");
