@@ -8,12 +8,19 @@ public class PreguntaEstadoBean implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Integer pregunta;
 	private String nombrePregunta;
 	private Integer positividad;
 	private Integer regular;
 	private Integer negatividad;
 	
 	
+	public Integer getPregunta() {
+		return pregunta;
+	}
+	public void setPregunta(Integer pregunta) {
+		this.pregunta = pregunta;
+	}
 	public String getNombrePregunta() {
 		return nombrePregunta;
 	}

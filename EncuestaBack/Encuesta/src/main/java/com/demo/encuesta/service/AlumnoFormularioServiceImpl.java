@@ -22,6 +22,7 @@ public class AlumnoFormularioServiceImpl implements AlumnoFormularioService
 		return alumnoFormularioRepository.ObtenerEspectativaPorPregunta(idDimension).stream()
 				.map(objeto -> {
 					PreguntaEstadoBean preguntaEstadoBean = new PreguntaEstadoBean();
+					preguntaEstadoBean.setPregunta((Integer) objeto[0]);
 					preguntaEstadoBean.setNombrePregunta((String) objeto[1]);
 					preguntaEstadoBean.setPositividad((Integer) objeto[2]);
 					preguntaEstadoBean.setRegular((Integer) objeto[3]);
@@ -37,6 +38,7 @@ public class AlumnoFormularioServiceImpl implements AlumnoFormularioService
 		return alumnoFormularioRepository.ObtenerPercepcionPorPregunta(idDimension).parallelStream()
 				.map(objeto -> {
 					PreguntaEstadoBean preguntaEstadoBean = new PreguntaEstadoBean();
+					preguntaEstadoBean.setPregunta((Integer) objeto[0]);
 					preguntaEstadoBean.setNombrePregunta((String) objeto[1]);
 					preguntaEstadoBean.setPositividad((Integer) objeto[2]);
 					preguntaEstadoBean.setRegular((Integer) objeto[3]);
