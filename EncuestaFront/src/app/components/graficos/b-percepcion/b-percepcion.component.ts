@@ -34,6 +34,8 @@ export class BPercepcionComponent implements OnInit, OnChanges {
 
   ngOnChanges(){
     if (this.percepcionGeneral.length != 0) {
+      console.log(this.percepcionGeneral);
+      
 
       this.barChartLabels = [];
       this.barChartData[0].data = [];
@@ -45,7 +47,7 @@ export class BPercepcionComponent implements OnInit, OnChanges {
       let neutro = [];
 
       for (let i = 0; i < this.percepcionGeneral.length; i++) {
-        this.barChartLabels.push('Pregunta ' + (i+1));
+        this.barChartLabels.push('Pregunta ' + this.percepcionGeneral[i].pregunta);
         positividad.push(this.percepcionGeneral[i].positividad);
         negatividad.push(this.percepcionGeneral[i].negatividad);
         neutro.push(this.percepcionGeneral[i].regular);

@@ -35,7 +35,7 @@ export class BExpectativaComponent implements OnInit, OnChanges {
 
   ngOnChanges(){
     if (this.expectativaGeneral.length != 0) {
-
+      
       this.barChartLabels = [];
       this.barChartData[0].data = [];
       this.barChartData[1].data = [];
@@ -46,7 +46,7 @@ export class BExpectativaComponent implements OnInit, OnChanges {
       let neutro = [];
 
       for (let i = 0; i < this.expectativaGeneral.length; i++) {
-        this.barChartLabels.push('Pregunta ' + (i+1));
+        this.barChartLabels.push('Pregunta ' + this.expectativaGeneral[i].pregunta);
         positividad.push(this.expectativaGeneral[i].positividad);
         negatividad.push(this.expectativaGeneral[i].negatividad);
         neutro.push(this.expectativaGeneral[i].regular);
