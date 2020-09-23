@@ -12,22 +12,24 @@ export class EmpatiaComponent implements OnInit {
   totalEncuestados:any[] = [];
   expectativaPorPregunta:any[] = [];
   conformidadPorTangibilidad:any[] = [];
+  percepcionGeneral:any[] = [];
+  expectativaGeneral:any[] = [];
 
   constructor(private empatiaService:EmpatiaService) { }
 
   ngOnInit() {
     this.getEncuentadosPorCiclo();
     this.getTotalEncuestados();
-    this.getExpectativaPorPregunta();
+    //this.getExpectativaPorPregunta();
     this.getConformidadDimensionAnio();
+    this.getPercepcionGeneralService();
+    this.getExpectativaGeneralService();
   }
 
   getEncuentadosPorCiclo(){
     this.empatiaService.getEncuentadosPorCiclo()
         .subscribe((data: any[]) => {
-          this.nro_encuestados_ciclo = data;
-          // console.log(this.nro_encuestados_ciclo);
-          
+          this.nro_encuestados_ciclo = data; 
         });
   }
 
@@ -35,26 +37,34 @@ export class EmpatiaComponent implements OnInit {
     this.empatiaService.getTotalEncuestados()
         .subscribe((data: any[]) => {
           this.totalEncuestados = data[0].cantidadTotal;
-          // console.log(this.totalEncuestados);
-          
         });
   }
 
   getExpectativaPorPregunta(){
     this.empatiaService.getExpectativaPorPregunta()
         .subscribe((data: any[]) => {
-          this.expectativaPorPregunta = data;
-          //console.log(this.expectativaPorPregunta);
-          
+          this.expectativaPorPregunta = data; 
         });
   }
 
   getConformidadDimensionAnio(){
     this.empatiaService.getConformidadDimensionAnio()
         .subscribe((data: any[]) => {
-          this.conformidadPorTangibilidad = data[0].listaConformidadAnioBean;
-          //console.log(this.conformidadPorTangibilidad);
-          
+          this.conformidadPorTangibilidad = data[0].listaConformidadAnioBean; 
+        });
+  }
+
+  getPercepcionGeneralService(){
+    this.empatiaService.getPercepcionGeneral()
+        .subscribe((data: any[]) => {
+          this.percepcionGeneral = data;
+        });
+  }
+
+  getExpectativaGeneralService(){
+    this.empatiaService.getExpectativaGeneral()
+        .subscribe((data: any[]) => {
+          this.expectativaGeneral = data;
         });
   }
 

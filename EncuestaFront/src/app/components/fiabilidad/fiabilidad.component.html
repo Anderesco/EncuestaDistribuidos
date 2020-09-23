@@ -1,8 +1,13 @@
 <div class="animated fadeIn fast">
     <mat-grid-list cols="12" rowHeight="300px">
-        <mat-grid-tile [colspan]="12">
+        <mat-grid-tile [colspan]="6">
             <mat-card>
-                <app-barra-expectativa [expectativaPorPregunta]= "expectativaPorPregunta"></app-barra-expectativa>
+                <app-b-expectativa [expectativaGeneral]= "expectativaGeneral"></app-b-expectativa>
+            </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="6">
+            <mat-card>
+                <app-b-percepcion [percepcionGeneral]= "percepcionGeneral"></app-b-percepcion>
             </mat-card>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="4">

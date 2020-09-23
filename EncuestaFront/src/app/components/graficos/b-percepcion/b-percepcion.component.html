@@ -1,8 +1,8 @@
 <div class="container">
     <h3>Nivel de Percepción Por Preguntas</h3>
     <div style="height:200px;width:95%;" class="chart-wrapper center">
-      <!-- <mat-spinner style="margin:0 auto;" *ngIf="!loading"></mat-spinner> -->
-        <canvas baseChart
+      <mat-spinner style="margin:0 auto;" *ngIf="!loading"></mat-spinner>
+        <canvas baseChart *ngIf="loading"
           [datasets]="barChartData"
           [labels]="barChartLabels"
           [options]="barChartOptions"

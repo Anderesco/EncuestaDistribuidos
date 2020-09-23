@@ -12,22 +12,24 @@ export class CortesiaComponent implements OnInit {
   totalEncuestados:any[] = [];
   expectativaPorPregunta:any[] = [];
   conformidadPorTangibilidad:any[] = [];
+  percepcionGeneral:any[] = [];
+  expectativaGeneral:any[] = [];
 
   constructor(private cortesiaService:CortesiaService) { }
 
   ngOnInit() {
     this.getEncuentadosPorCiclo();
     this.getTotalEncuestados();
-    this.getExpectativaPorPregunta();
+    //this.getExpectativaPorPregunta();
     this.getConformidadDimensionAnio();
+    this.getPercepcionGeneralService();
+    this.getExpectativaGeneralService();
   }
 
   getEncuentadosPorCiclo(){
     this.cortesiaService.getEncuentadosPorCiclo()
         .subscribe((data: any[]) => {
           this.nro_encuestados_ciclo = data;
-          // console.log(this.nro_encuestados_ciclo);
-          
         });
   }
 
@@ -35,8 +37,6 @@ export class CortesiaComponent implements OnInit {
     this.cortesiaService.getTotalEncuestados()
         .subscribe((data: any[]) => {
           this.totalEncuestados = data[0].cantidadTotal;
-          // console.log(this.totalEncuestados);
-          
         });
   }
 
@@ -44,8 +44,6 @@ export class CortesiaComponent implements OnInit {
     this.cortesiaService.getExpectativaPorPregunta()
         .subscribe((data: any[]) => {
           this.expectativaPorPregunta = data;
-          //console.log(this.expectativaPorPregunta);
-          
         });
   }
 
@@ -53,8 +51,20 @@ export class CortesiaComponent implements OnInit {
     this.cortesiaService.getConformidadDimensionAnio()
         .subscribe((data: any[]) => {
           this.conformidadPorTangibilidad = data[0].listaConformidadAnioBean;
-          //console.log(this.conformidadPorTangibilidad);
-          
+        });
+  }
+
+  getPercepcionGeneralService(){
+    this.cortesiaService.getPercepcionGeneral()
+        .subscribe((data: any[]) => {
+          this.percepcionGeneral = data;
+        });
+  }
+
+  getExpectativaGeneralService(){
+    this.cortesiaService.getExpectativaGeneral()
+        .subscribe((data: any[]) => {
+          this.expectativaGeneral = data;
         });
   }
 

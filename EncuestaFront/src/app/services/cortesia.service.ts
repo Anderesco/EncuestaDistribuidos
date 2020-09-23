@@ -49,4 +49,27 @@ export class CortesiaService {
     };
     return this.http.get('http://localhost:8080/alumno/reporte/3', httpOptions);
   }
+
+  getPercepcionGeneral(){
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+      })
+    };
+
+    return this.http.get('http://localhost:8080/alumnoPregunta/Percepcion/3', httpOptions)
+
+  }
+
+  getExpectativaGeneral(){
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+      })
+    };
+
+    return this.http.get('http://localhost:8080/alumnoPregunta/Espectativa/3', httpOptions);
+  }
 }

@@ -16,7 +16,6 @@ export class BarraIndicadoresComponent implements OnInit, OnChanges {
     responsive: true,
     maintainAspectRatio: false
   };
-  //public barChartLabels: Label[] = ['Capacidad de Respuesta', 'Elementos Tangibles', 'Empatía', 'Expectativa de Fiabilidad', 'Seguridad'];
   public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'horizontalBar';
   public barChartLegend = true;
@@ -37,18 +36,12 @@ export class BarraIndicadoresComponent implements OnInit, OnChanges {
 
     if (this.porcentajeDimiensiones.length > 0) {
       this.barChartLabels = [];
-      //let dataExpectativa = [];
-      //console.log(this.barChartData);
-      //let dataExpectativa = [];
       this.barChartData[0].data = [];
       this.barChartData[1].data = [];
       for (let index = 0; index < this.porcentajeDimiensiones.length; index++) {
         this.barChartLabels.push(this.porcentajeDimiensiones[index].nombreDimension);
-        //dataExpectativa[index].push("9")
         this.barChartData[0].data.push(this.porcentajeDimiensiones[index].espectativa*100);
         this.barChartData[1].data.push(this.porcentajeDimiensiones[index].percepcion*100);
-        //onsole.log(this.porcentajeDimiensiones[index].espectativa);
-        
       }
 
       this.barChartData[0].data.push(0);

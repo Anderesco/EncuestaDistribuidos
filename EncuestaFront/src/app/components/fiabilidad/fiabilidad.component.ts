@@ -12,22 +12,24 @@ export class FiabilidadComponent implements OnInit {
   totalEncuestados:any[] = [];
   expectativaPorPregunta:any[] = [];
   conformidadPorTangibilidad:any[] = [];
+  percepcionGeneral:any[] = [];
+  expectativaGeneral:any[] = [];
 
   constructor(private fiabilidadService:FiabilidadService) { }
 
   ngOnInit() {
     this.getEncuentadosPorCiclo();
     this.getTotalEncuestados();
-    this.getExpectativaPorPregunta();
+    //this.getExpectativaPorPregunta();
     this.getConformidadDimensionAnio();
+    this.getPercepcionGeneralService();
+    this.getExpectativaGeneralService();
   }
 
   getEncuentadosPorCiclo(){
     this.fiabilidadService.getEncuentadosPorCiclo()
         .subscribe((data: any[]) => {
           this.nro_encuestados_ciclo = data;
-          //console.log(this.nro_encuestados_ciclo);
-          
         });
   }
 
@@ -35,8 +37,6 @@ export class FiabilidadComponent implements OnInit {
     this.fiabilidadService.getTotalEncuestados()
         .subscribe((data: any[]) => {
           this.totalEncuestados = data[0].cantidadTotal;
-          //console.log(this.totalEncuestados);
-          
         });
   }
 
@@ -44,8 +44,6 @@ export class FiabilidadComponent implements OnInit {
     this.fiabilidadService.getExpectativaPorPregunta()
         .subscribe((data: any[]) => {
           this.expectativaPorPregunta = data;
-          //console.log(this.expectativaPorPregunta);
-          
         });
   }
 
@@ -53,8 +51,20 @@ export class FiabilidadComponent implements OnInit {
     this.fiabilidadService.getConformidadDimensionAnio()
         .subscribe((data: any[]) => {
           this.conformidadPorTangibilidad = data[0].listaConformidadAnioBean;
-          //console.log(this.conformidadPorTangibilidad);
-          
+        });
+  }
+
+  getPercepcionGeneralService(){
+    this.fiabilidadService.getPercepcionGeneral()
+        .subscribe((data: any[]) => {
+          this.percepcionGeneral = data;
+        });
+  }
+
+  getExpectativaGeneralService(){
+    this.fiabilidadService.getExpectativaGeneral()
+        .subscribe((data: any[]) => {
+          this.expectativaGeneral = data;
         });
   }
 

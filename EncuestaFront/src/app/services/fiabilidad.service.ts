@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class FiabilidadService {
 
   constructor(private http: HttpClient) { 
-    //console.log("Fiabilidad Service listo!!");
+    
   }
 
   getEncuentadosPorCiclo(){
@@ -50,5 +50,28 @@ export class FiabilidadService {
       })
     };
     return this.http.get('http://localhost:8080/alumno/reporte/1', httpOptions);
+  }
+
+  getPercepcionGeneral(){
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+      })
+    };
+
+    return this.http.get('http://localhost:8080/alumnoPregunta/Percepcion/1', httpOptions)
+
+  }
+
+  getExpectativaGeneral(){
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+      })
+    };
+
+    return this.http.get('http://localhost:8080/alumnoPregunta/Espectativa/1', httpOptions);
   }
 }

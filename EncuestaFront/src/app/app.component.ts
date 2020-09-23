@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
       this.isLoggedIn = value;
       let retrievedObject = JSON.parse(localStorage.getItem('user'));
       if (retrievedObject != null) {
-        console.log(retrievedObject);
+        // console.log(retrievedObject);
         this.nombres = retrievedObject.nombres;
         this.apellidoPaterno = retrievedObject.apelidoPaterno;
       }
