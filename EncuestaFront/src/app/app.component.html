@@ -6,7 +6,7 @@
   </button>
   <span>Encuesta Distribuidos</span>
   <span class="example-spacer"></span>
-  <button mat-button>Christian Dionisio Triveño</button>
+  <button mat-button>{{nombres}} {{apellidoPaterno}}</button>
   <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>power_settings_new</mat-icon></button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="onLogout()"><mat-icon>power_settings_new</mat-icon>Cerrar Sesión</button>

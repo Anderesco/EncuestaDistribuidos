@@ -36,6 +36,7 @@ import { FiabilidadComponent } from './components/fiabilidad/fiabilidad.componen
 import { EmpatiaComponent } from './components/empatia/empatia.component';
 import { CapRespuestaComponent } from './components/cap-respuesta/cap-respuesta.component';
 import { CortesiaComponent } from './components/cortesia/cortesia.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 //Rutas
 import { APP_ROUTING } from './app.routes';
@@ -97,7 +98,8 @@ import { AdminComponent } from './components/admin/admin.component';
     HttpClientModule,
     MatProgressSpinnerModule,
     MatExpansionModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSnackBarModule
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { UserResponse } from '../../shared/guard/userResponse';
 import { AuthService } from '../../services/auth.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -33,8 +35,24 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      this.authService.login(this.form.value);
+      this.authService.login(this.form.value)
+      .subscribe((response:UserResponse) =>{
+        //console.log(response);
+        if (response.responseCode == "00") {
+          this.authService.setLoggedIn(response);
+        }
+      },
+      error =>{
+        //console.log(error.error.messageResponse);
+        this.openSnackBar(error.error.messageResponse, 'Cerrar'); 
+      });
     }
     this.formSubmitAttempt = true;
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }

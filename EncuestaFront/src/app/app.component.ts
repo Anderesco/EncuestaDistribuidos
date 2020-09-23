@@ -14,6 +14,9 @@ export class AppComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;
   isLoggedIn:boolean;
   options: FormGroup;
+  durationInSeconds = 3;
+  nombres = '';
+  apellidoPaterno = '';
 
   constructor(fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.options = fb.group({
@@ -26,7 +29,12 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.authService.isLoggedIn.subscribe(value => {
       this.isLoggedIn = value;
-      //console.log(this.isLoggedIn);
+      let retrievedObject = JSON.parse(localStorage.getItem('user'));
+      if (retrievedObject != null) {
+        console.log(retrievedObject);
+        this.nombres = retrievedObject.nombres;
+        this.apellidoPaterno = retrievedObject.apelidoPaterno;
+      }
       
     });
     this.router.events.subscribe(event =>{
@@ -42,11 +50,6 @@ export class AppComponent implements OnInit {
     //console.log(this.router.url);
     
   }
-
-  // ngOnChanges() {
-    
-  //   console.log(this.router.url);
-  // }
 
   onLogout() {
     this.authService.logout();
