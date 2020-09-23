@@ -17,6 +17,8 @@ import com.demo.encuesta.bean.CantidadTotalEncuestaBean;
 import com.demo.encuesta.bean.DimensionAnioBean;
 import com.demo.encuesta.bean.EspectativaPreguntaBean;
 import com.demo.encuesta.bean.PositividadDimensionBean;
+import com.demo.encuesta.bean.PreguntaEstadoBean;
+import com.demo.encuesta.service.hibernate.AlumnoFormularioService;
 import com.demo.encuesta.service.hibernate.AlumnoService;
 import com.demo.encuesta.service.hibernate.DimensionService;
 
@@ -29,6 +31,9 @@ public class AlumnoController
 	
 	@Autowired
 	DimensionService dimensionService;
+	
+	@Autowired
+	AlumnoFormularioService alumnoFormularioService;
 	
 	@ResponseBody
 	@GetMapping("/alumno")
@@ -76,5 +81,16 @@ public class AlumnoController
 	@GetMapping("/alumno/analisisBrecha/{idDimension}")
 	public List<BrechaBean> ObtenerAnalisisBrecha(@PathVariable Integer idDimension){
 		return dimensionService.ObtenerListaBrecha(idDimension);
+	}
+	
+	@ResponseBody
+	@GetMapping("/alumnoPregunta/{idTipo}/{idDimension}")
+	public List<PreguntaEstadoBean> ObtenerPreguntaEspectativa(@PathVariable String idTipo, @PathVariable Integer idDimension){
+		if(idTipo.equals("Espectativa"))
+			return this.alumnoFormularioService.ObtenerAlumnosPreguntaEspectativa(idDimension);
+		else if(idTipo.equals("Percepcion"))
+			return this.alumnoFormularioService.ObtenerAlumnosPreguntaPercepcion(idDimension);
+		else
+			return null;
 	}
 }

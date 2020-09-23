@@ -1,7 +1,5 @@
 package com.demo.encuesta.service;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

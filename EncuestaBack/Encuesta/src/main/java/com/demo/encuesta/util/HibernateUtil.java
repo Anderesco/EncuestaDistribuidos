@@ -12,6 +12,7 @@ import com.demo.encuesta.entity.Alumno;
 import com.demo.encuesta.entity.AlumnoFormulario;
 import com.demo.encuesta.entity.Dimension;
 import com.demo.encuesta.entity.Preguntas;
+import com.demo.encuesta.entity.Usuario;
 
 
 public class HibernateUtil 
@@ -28,17 +29,17 @@ private static SessionFactory sessionFactory;
 				
 				Properties ajustes = new Properties();
 				
+				/*ajustes.put(Environment.SHOW_SQL, "true");
+				ajustes.put(Environment.URL, "jdbc:jtds:sqlserver://localhost;database=encuesta");
+				ajustes.put(Environment.USER, "sa");
+				ajustes.put(Environment.PASS, "sqlserver");
+				ajustes.put(Environment.DIALECT, "org.hibernate.dialect.SQLServerDialect");*/
+				
 				ajustes.put(Environment.SHOW_SQL, "true");
-				ajustes.put(Environment.URL, "jdbc:jtds:sqlserver://dadserver.database.windows.net;database=DADDB");
+				ajustes.put(Environment.URL, "jdbc:jtds:sqlserver://dadserver.database.windows.net;databaseName=DADDB;integrated‌​Security=true");
 				ajustes.put(Environment.USER, "felipe");
 				ajustes.put(Environment.PASS, "Jose1234");
 				ajustes.put(Environment.DIALECT, "org.hibernate.dialect.SQLServerDialect");
-				
-				/*ajustes.put(Environment.SHOW_SQL, "true");
-				ajustes.put(Environment.URL, "jdbc:jtds:sqlserver://dadserver.database.windows.net;databaseName=DADDB");
-				ajustes.put(Environment.USER, "felipe");
-				ajustes.put(Environment.PASS, "Jose1234");
-				ajustes.put(Environment.DIALECT, "org.hibernate.dialect.SQLServerDialect");*/
 				
 				ajustes.put(Environment.SHOW_SQL, "true");
                 ajustes.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
@@ -49,7 +50,7 @@ private static SessionFactory sessionFactory;
                 configuration.addAnnotatedClass(Dimension.class);
                 configuration.addAnnotatedClass(Preguntas.class);
                 configuration.addAnnotatedClass(AlumnoFormulario.class);
-
+                configuration.addAnnotatedClass(Usuario.class);
                 
                 ServiceRegistry serviceRegistry = (ServiceRegistry) new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
                 
